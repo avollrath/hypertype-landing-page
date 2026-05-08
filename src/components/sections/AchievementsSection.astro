@@ -1,0 +1,117 @@
+---
+import Badge from '@/components/ui/Badge.astro';
+
+interface Category {
+  name: string;
+  icon: string;
+}
+
+interface Props {
+  categories?: Category[];
+}
+
+const {
+  categories = [
+    { name: 'Accuracy', icon: '◎' },
+    { name: 'Speed', icon: '↯' },
+    { name: 'Endurance', icon: '◴' },
+    { name: 'Combat', icon: '※' }
+  ]
+} = Astro.props;
+
+const badges = ['N', 'P', 'T', 'R', 'W', 'K', 'I', 'B', 'F', 'E', 'L', 'A'];
+---
+
+<section class="achievements" aria-labelledby="achievements-title" data-reveal>
+  <div class="container">
+    <h2 id="achievements-title">UNLOCK BADGES</h2>
+    <p class="subtitle">Over 25+ achievements across 4 categories</p>
+    <div class="category-grid">
+      {categories.map((category) => (
+        <article>
+          <span aria-hidden="true">{category.icon}</span>
+          <h3>{category.name}</h3>
+        </article>
+      ))}
+    </div>
+    <div class="badge-grid" aria-label="Achievement badge gallery">
+      {badges.map((badge, index) => <Badge label={badge} unlocked={index === 1 || index === 4 || index === 7} />)}
+    </div>
+    <a class="achievement-link" href="https://avollrath.github.io/HyperType/">View all achievements in-game →</a>
+  </div>
+</section>
+
+<style>
+  .achievements {
+    padding: var(--spacing-section) 0;
+  }
+
+  h2 {
+    color: var(--color-text);
+    font-size: clamp(1.9rem, 4vw, 2.35rem);
+    text-align: center;
+    text-shadow: 0 0 24px rgba(246, 247, 251, 0.32);
+  }
+
+  .subtitle {
+    margin-top: 12px;
+    text-align: center;
+  }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    width: min(100%, 840px);
+    margin: 46px auto 34px;
+  }
+
+  article {
+    display: grid;
+    min-height: 164px;
+    place-items: center;
+    border: 1px solid rgba(255, 0, 184, 0.5);
+    border-radius: 8px;
+    background: rgba(16, 19, 34, 0.86);
+    padding: 28px 18px;
+    text-align: center;
+    box-shadow: 0 0 28px rgba(255, 0, 184, 0.08);
+  }
+
+  article span {
+    color: var(--color-cyan);
+    font-size: 2.5rem;
+    text-shadow: 0 0 18px rgba(0, 214, 255, 0.75);
+  }
+
+  h3 {
+    color: var(--color-magenta);
+    font-size: 0.94rem;
+    letter-spacing: 0.1em;
+  }
+
+  .badge-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: min(100%, 720px);
+    margin-inline: auto;
+  }
+
+  .achievement-link {
+    display: block;
+    margin-top: 26px;
+    color: var(--color-magenta);
+    font-size: 0.86rem;
+    text-align: center;
+  }
+
+  @media (max-width: 760px) {
+    .category-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 460px) {
+    .category-grid { grid-template-columns: 1fr; }
+  }
+</style>

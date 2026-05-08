@@ -1,0 +1,59 @@
+---
+import Button from '@/components/ui/Button.astro';
+
+interface Props {
+  gameUrl?: string;
+}
+
+const { gameUrl = 'https://avollrath.github.io/HyperType/' } = Astro.props;
+---
+
+<section class="final-cta" aria-labelledby="final-cta-title">
+  <div class="synthwave-grid" aria-hidden="true"></div>
+  <div class="glow-layer" aria-hidden="true"></div>
+  <div class="content">
+    <h2 id="final-cta-title">READY TO TYPE?</h2>
+    <Button href={gameUrl} label="LAUNCH_HYPERTYPE.EXE" class="terminal-button">LAUNCH_HYPERTYPE.EXE</Button>
+  </div>
+</section>
+
+<style>
+  .final-cta {
+    position: relative;
+    display: grid;
+    min-height: 430px;
+    place-items: center;
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 0, 184, 0.4);
+    background: var(--color-bg-deep);
+  }
+
+  .glow-layer {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 50%, rgba(0, 214, 255, 0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 80% 40% at 50% 100%, rgba(255, 0, 184, 0.12) 0%, transparent 60%);
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 30px;
+    justify-items: center;
+    text-align: center;
+  }
+
+  h2 {
+    color: var(--color-text);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0.34);
+  }
+
+  .terminal-button::after {
+    content: "|";
+    margin-left: 8px;
+    animation: blink 1s step-end infinite;
+  }
+</style>
