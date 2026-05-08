@@ -1,7 +1,5 @@
 ---
-import { Image } from 'astro:assets';
 import Button from '@/components/ui/Button.astro';
-import gameplayScreenshot from '@/assets/images/gameplay-screenshot.webp';
 
 interface Props {
   gameUrl?: string;
@@ -14,24 +12,25 @@ const { gameUrl = 'https://avollrath.github.io/HyperType/' } = Astro.props;
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="container hero-inner">
     <p class="eyebrow hero-reveal">// SYNTHWAVE TYPING SHOOTER</p>
-    <h1 class="hero-reveal text-glow-cyan">HYPERTYPE: TYPE TO SURVIVE</h1>
+    <h1 class="hero-reveal text-glow-cyan">HyperType</h1>
     <p class="subtitle hero-reveal">
       A fast-paced synthwave typing shooter. Type words to destroy enemies, build streaks, and chase high scores.
     </p>
-    <div class="cta-row hero-reveal">
-      <Button href={gameUrl} label="PLAY NOW" />
-      <Button href="#about" label="WATCH GAMEPLAY" variant="outline">▷ WATCH GAMEPLAY</Button>
-    </div>
+   
     <figure class="screenshot-panel hero-reveal">
-      <Image
-        src={gameplayScreenshot}
-        alt="HyperType gameplay showing pixel-art enemies with word tiles to type, cyberpunk cityscape background, and HUD with score, level, and heart lives"
-        loading="eager"
-        fetchpriority="high"
-        width={1280}
-        height={720}
-      />
+      <video
+        src="/videos/Hero_1600p.mp4"
+        autoplay
+        loop
+        muted
+        playsinline
+        preload="auto"
+        controls
+      ></video>
     </figure>
+     <div class="cta-row hero-reveal">
+      <Button href={gameUrl} label="PLAY NOW" />
+    </div>
   </div>
 </section>
 
@@ -94,7 +93,6 @@ const { gameUrl = 'https://avollrath.github.io/HyperType/' } = Astro.props;
     border: 2px solid var(--color-panel-border-magenta);
     border-radius: 8px;
     background: var(--color-bg-deep);
-    animation: pulse-glow-magenta 4s ease-in-out infinite;
   }
 
   .screenshot-panel::after {
@@ -105,10 +103,13 @@ const { gameUrl = 'https://avollrath.github.io/HyperType/' } = Astro.props;
     background: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.035) 1px, transparent 1px, transparent 4px);
   }
 
-  img {
+  img,
+  video {
     display: block;
     width: 100%;
     height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
   }
 
   .hero-reveal:nth-child(1) { animation-delay: 0ms; }
