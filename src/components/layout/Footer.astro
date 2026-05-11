@@ -23,7 +23,7 @@ const {
     <div>
       <a class="footer-brand text-glow-magenta" href="#main-content">HYPERTYPE</a>
       <p>© 2026 HYPERTYPE_SYSTEMS.</p>
-      <p>by Andre Vollrath</p>
+      <p>by <a href="https://www.vollrath.dev" class="author-link">André Vollrath</a></p>
     </div>
     <nav class="footer-links" aria-label="Footer navigation">
       {links.map((link) => <a href={link.href}>{link.label}</a>)}
@@ -61,6 +61,16 @@ const {
   p {
     margin-top: 6px;
     font-size: 0.72rem;
+  }
+
+  .author-link {
+    color: var(--color-muted);
+    transition: color 150ms ease, text-shadow 150ms ease;
+  }
+
+  .author-link:hover {
+    color: var(--color-magenta);
+    text-shadow: 0 0 14px rgba(255, 0, 184, 0.65);
   }
 
   .footer-links {

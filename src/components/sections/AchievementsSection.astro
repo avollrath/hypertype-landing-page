@@ -1,5 +1,8 @@
 ---
 import Badge from '@/components/ui/Badge.astro';
+import firstBlood from '@/assets/images/badges/first_blood.png';
+import crosshair from '@/assets/images/badges/crosshair.png';
+import cup from '@/assets/images/badges/cup.png';
 
 interface Category {
   name: string;
@@ -19,7 +22,12 @@ const {
   ]
 } = Astro.props;
 
-const badges = ['N', 'P', 'T', 'R', 'W', 'K', 'I', 'B', 'F', 'E', 'L', 'A'];
+const badges = ['N', 'P', 'T', 'R', 'W', 'K', 'I', 'B', 'F'];
+const realBadges = [
+  { label: 'First Blood', image: firstBlood },
+  { label: 'Crosshair', image: crosshair },
+  { label: 'Cup', image: cup },
+];
 ---
 
 <section class="achievements" aria-labelledby="achievements-title" data-reveal>
@@ -35,7 +43,8 @@ const badges = ['N', 'P', 'T', 'R', 'W', 'K', 'I', 'B', 'F', 'E', 'L', 'A'];
       ))}
     </div>
     <div class="badge-grid" aria-label="Achievement badge gallery">
-      {badges.map((badge, index) => <Badge label={badge} unlocked={index === 1 || index === 4 || index === 7} />)}
+      {realBadges.map((badge) => <Badge label={badge.label} unlocked={true} image={badge.image} />)}
+      {badges.map((badge, index) => <Badge label={badge} unlocked={index === 1 || index === 4} />)}
     </div>
     <a class="achievement-link" href="https://avollrath.github.io/HyperType/">View all achievements in-game →</a>
   </div>

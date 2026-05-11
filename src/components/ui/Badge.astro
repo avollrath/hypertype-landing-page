@@ -2,13 +2,17 @@
 interface Props {
   label: string;
   unlocked?: boolean;
+  image?: ImageMetadata;
 }
 
-const { label, unlocked = false } = Astro.props;
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+const { label, unlocked = false, image } = Astro.props;
 ---
 
-<span class:list={['badge-tile', unlocked && 'unlocked']} aria-label={`${label} badge ${unlocked ? 'unlocked' : 'locked'}`}>
-  {label}
+<span class:list={['badge-tile', unlocked && 'unlocked', image && 'has-image']} aria-label={`${label} badge ${unlocked ? 'unlocked' : 'locked'}`}>
+  {image ? <Image src={image} alt={`${label} badge`} width={40} height={40} /> : label}
 </span>
 
 <style>
@@ -29,6 +33,16 @@ const { label, unlocked = false } = Astro.props;
     border-color: rgba(255, 0, 184, 0.82);
     color: var(--color-magenta);
     box-shadow: 0 0 18px rgba(255, 0, 184, 0.25);
+  }
+
+  .badge-tile.has-image {
+    padding: 4px;
+  }
+
+  .badge-tile.has-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   .badge-tile:hover {
