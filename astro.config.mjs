@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://avollrath.github.io',
-  base: '/hyperlapse-landing-page',
+  base: '/hypertype-landing-page',
   vite: {
     plugins: [tailwindcss()],
     resolve: {
